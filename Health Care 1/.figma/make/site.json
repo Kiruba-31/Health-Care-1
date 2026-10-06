@@ -1,0 +1,11 @@
+{
+  "title": "Health Care",
+  "description": "This web application provides users with a comprehensive platform to access and manage complete websites, enhancing their online presence and functionality.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

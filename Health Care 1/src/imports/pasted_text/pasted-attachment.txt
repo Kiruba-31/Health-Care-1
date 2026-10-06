@@ -1,0 +1,80 @@
+Here is a prompt you can use with AI code generation tools, LLMs, or software teams to build this full-scale Clinical Decision Support System (CDSS) dashboard from scratch:
+
+Prompt: AI Clinical Decision Support System (CDSS) Dashboard
+Plaintext
+Act as a Principal Healthcare Informatics Architect and Senior Full-Stack Frontend Engineer. 
+Build a production-grade, interactive, and responsive Clinical Decision Support System (CDSS) Web Dashboard designed for physicians, triage nurses, and medical specialists. 
+
+The goal of the application is to ingest multi-modal clinical data (patient demographics, live bedside vitals, electronic health history, and diagnostic lab reports) and provide explainable, AI-assisted differential diagnoses, risk stratification scores, and drug-interaction-checked clinical care pathways.
+
+---
+
+### 1. TECH STACK & DESIGN SYSTEM
+- Framework: React (Tailwind CSS, Lucide React icons, Recharts for hemodynamic trends).
+- Styling & Theme: Clean, modern clinical aesthetic. Palette: Slate/Zinc neutral dark backgrounds (#0B1120 / #111827), clinical cyan/sky (#0EA5E9) for active states, emerald (#10B981) for normal ranges, amber (#F59E0B) for borderline risks, and crimson/rose (#F43F5E) for critical alerts.
+- Typography: High-legibility sans-serif with monospace elements for lab numerical values and vitals telemetry.
+- State Architecture: Comprehensive state handling for active patient records, editable vital signs/lab values, differential recalculation, and tab switching.
+
+---
+
+### 2. CORE ARCHITECTURE & VIEWS
+Implement a sidebar/tabbed navigation system supporting the following core modules:
+
+#### VIEW 1: Clinical Overview (Executive Command Center)
+- Patient Header Banner: Name, MRN, Age, Sex, Blood Group, Height/Weight, Code Status (e.g., FULL CODE), Known Allergies, Attending Physician.
+- Multi-Patient Selector: Ability to switch between at least 3 distinct clinical profiles:
+  1. Acute Coronary Syndrome (STEMI / Severe Angina).
+  2. Sepsis / Septic Shock secondary to Urosepsis.
+  3. Acute Decompensated Heart Failure with Renal Dysfunction.
+- Real-Time Vitals Cards: Heart Rate (BPM), Blood Pressure (mmHg), SpO2 (%), Respiratory Rate (bpm), Core Body Temp (°C/°F). Each card must display baseline, current value, status pill (Normal/Elevated/Critical), and mini-sparkline trend.
+- Risk Gauge Meters: Visual circular/semi-circle progress bars for:
+  - qSOFA / Sepsis Progression Score.
+  - TIMI / Cardiovascular Risk Index.
+- Hemodynamic Timeline Chart: Recharts interactive line/area graph visualizing 24-hour trends for Mean Arterial Pressure (MAP), Heart Rate, and Oxygen Saturation.
+
+#### VIEW 2: Patient Intake & Live Parameter Analyzer
+- Interactive Clinical Adjuster: Interactive inputs and range sliders allowing clinicians to simulate changes in real-time:
+  - Hemodynamics: Systolic/Diastolic BP, Heart Rate, SpO2.
+  - Biomarkers: Cardiac Troponin I (ng/mL), WBC count (k/µL), Serum Creatinine (mg/dL), Blood Lactate (mmol/L).
+- Dynamic Symptom Checklist: Multi-select tags (e.g., Retrosternal chest pain, radiating left arm pain, dyspnea, diaphoresis, productive cough, fever/rigors).
+- Trigger Button: "Recalculate CDSS Inference & Risk Scores" with loading state that dynamically recalculates differential diagnoses, alert levels, and suggested clinical pathways.
+
+#### VIEW 3: Diagnostic Lab & ECG Report Viewer
+- 12-Lead ECG Digital Strip Impression: Diagnostic visualization with automated rhythm analysis (e.g., "Sinus tachycardia with 2.5mm ST-segment elevation in Leads V2-V4, T-wave inversion in aVL").
+- Tabulated Comprehensive Metabolic & Biomarker Panel:
+  - Columns: Test Parameter, Observed Value, Standard Reference Range, Delta/Status flag (High/Low/Critical), Specimen Collection Timestamp.
+  - Lab Groups: Complete Blood Count (CBC), Comprehensive Metabolic Panel (CMP), and Cardiac/Inflammatory Biomarkers.
+
+#### VIEW 4: AI Differential Diagnosis & Care Pathways Engine
+- Ranked Differential Diagnosis Cards:
+  - Primary, Secondary, and Tertiary suspected conditions.
+  - Confidence probability percentage bar (e.g., 94% Acute Anteroseptal STEMI).
+  - "Key Supporting Clinical Drivers": Bulleted list linking symptoms, lab flags, and vitals to this inference.
+  - "Rule-Out Criteria / Missing Markers": What labs/findings contradict or need testing before confirmation.
+- Drug-Drug & Drug-Allergy Warning System:
+  - Real-time contraindication engine (e.g., Warning: Nitroglycerin contraindicated if patient has taken PDE-5 inhibitors or is hypotensive).
+- Guideline-Directed Medical Therapy (GDMT):
+  - Immediate Action Protocols (e.g., Emergency Cardiac Catheterization Lab Activation, Dual Antiplatelet Therapy - DAPT, Oxygenation).
+  - Medical references/citations (e.g., ACC/AHA 2023 Guidelines, Surviving Sepsis Campaign 2021).
+
+#### VIEW 5: System Pipeline Flowchart (Data Architecture)
+- Visual Step-by-Step Pipeline:
+  1. Data Ingestion (Bedside Telemetry, HL7/FHIR EHR sync, PACS Imaging, LIS Laboratory feeds).
+  2. Preprocessing & Normalization (FHIR formatting, artifact rejection, time-series alignment).
+  3. CDSS Multi-Model Inference (Biomarker threshold rules + LLM Clinical Summarizer + Predictive ML Risk Engines).
+  4. Clinical Validation & Safety Guardrails (Contraindication checking, allergy matrix, dosage safety).
+  5. Physician Interface & Actionable Order Generation (EHR push, Smart Alert, Care Plan).
+- Include an interactive node inspector showing sample JSON payloads (e.g., FHIR Observation resource) when clicking pipeline stages.
+
+#### VIEW 6: Blueprints, Wireframe & Compliance Specs
+- System Architecture Wireframe diagram breaking down UI zones (Grid layout, Breakpoints, Widget modules).
+- Recommended Production Tech Stack (FastAPI/Python microservices, BioBERT/ClinicalLLM, PostgreSQL + TimescaleDB, Redis, FHIR server like HAPI-FHIR).
+- Clinical Regulatory & Compliance checklist (HIPAA security, HL7 FHIR v4 standard, DICOM imaging integration, SaMD / FDA Class II Clinical Decision Support guidelines, Explainability / Human-in-the-Loop constraints).
+
+---
+
+### 3. INTERACTION & POLISH REQUIREMENTS
+- Clean tabs to toggle smoothly across all views without page reloads.
+- Responsive layout adapting from high-res ICU clinical monitors down to tablet view.
+- Realistic clinical data mockups—use clinically accurate terminology, valid medical unit metrics, and realistic differential scenarios.
+- Self-contained single-page architecture with dummy data ready to execute immediately.
