@@ -1,35 +1,31 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.entity.Patient;
 import com.example.demo.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin(origins = {"http://localhost:8443", "https://health-care-1-ochre.vercel.app"})
 @RestController
 @RequestMapping("/api/patients")
-@CrossOrigin(origins = "http://localhost:8443")
 public class PatientController {
 
-    private final PatientService service;
+    private final PatientService patientService;
 
-    public PatientController(PatientService service) {
-        this.service = service;
+    @Autowired
+    public PatientController(PatientService patientService) {
+        this.patientService = patientService;
     }
 
     @GetMapping
-    public List<Patient> getPatients() {
-        return service.getAllPatients();
+    public List<Patient> getAllPatients() {
+        return patientService.getAllPatients();
     }
 
     @PostMapping
-    public Patient addPatient(@RequestBody Patient patient) {
-        return service.addPatient(patient);
+    public Patient createPatient(@RequestBody Patient patient) {
+        return patientService.createPatient(patient);
     }
 }

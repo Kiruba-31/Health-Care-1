@@ -1,17 +1,19 @@
 package com.example.demo.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.example.demo.entity.Patient;
 import com.example.demo.repository.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientService {
 
     private final PatientRepository patientRepository;
 
+    @Autowired
     public PatientService(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
     }
@@ -20,7 +22,11 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
-    public Patient addPatient(Patient patient) {
+    public Patient createPatient(Patient patient) {
         return patientRepository.save(patient);
+    }
+
+    public Optional<Patient> getPatientById(Long id) {
+        return patientRepository.findById(id);
     }
 }
